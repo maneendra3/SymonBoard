@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.kohls.logistics.symon-board</groupId>
+		<artifactId>symon-board</artifactId>
+		<version>201806.0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.kohls.logistics.symon-board-view</groupId>
+	<artifactId>symon-board-view</artifactId>
+	<packaging>jar</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Symon Board View</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>install_npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<nodeVersion>v8.9.4</nodeVersion>
+							<!-- <nodeDownloadRoot>http://merch-nexus.kohls.com:8080/content/repositories/thirdparty/com/kohls/tools/node/</nodeDownloadRoot> -->
+						</configuration>
+					</execution>
+					<!-- <execution>
+						<id>configure_npm_proxy</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<arguments>config set proxy http://proxy.kohls.com:3128/ config
+								set https-proxy http://proxy.kohls.com:3128/</arguments>
+						</configuration>
+					</execution> -->
+					<execution>
+						<id>configure_npm_registry</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<arguments>config set registry http://registry.npmjs.org/</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>npm run-script build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run-script build</arguments>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>copy-files</id>
+						<phase>compile</phase>
+						<!-- <goals>
+							<goal>run</goal>
+						</goals> -->
+						<configuration>
+							<target name="copy files to web project">
+								<copy todir="/src/main/resources/public/">
+									<fileset dir="${project.build.directory}/dist/" includes="*">
+										<excludes>
+											<exclude>*.txt</exclude>
+										</excludes>
+									</fileset>
+								</copy>
+							</target>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

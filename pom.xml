@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<name>Symon Board Replacement</name>
+	<parent>
+		<groupId>com.kohls.ocf</groupId>
+		<artifactId>master-pom</artifactId>
+		<version>35.2.25.fa4a954</version>
+	</parent>
+	<groupId>com.kohls.logistics.symon-board</groupId>
+	<artifactId>symon-board</artifactId>
+	<version>201806.0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>symon-board-app</module>
+		<module>symon-board-view</module>
+	</modules>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+</project>
