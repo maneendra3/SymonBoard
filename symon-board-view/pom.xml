@@ -68,28 +68,31 @@
 							<arguments>run-script build</arguments>
 						</configuration>
 					</execution>
-
-					<execution>
-						<id>copy-files</id>
-						<phase>compile</phase>
-						<!-- <goals>
-							<goal>run</goal>
-						</goals> -->
-						<configuration>
-							<target name="copy files to web project">
-								<copy todir="/src/main/resources/public/">
-									<fileset dir="${project.build.directory}/dist/" includes="*">
-										<excludes>
-											<exclude>*.txt</exclude>
-										</excludes>
-									</fileset>
-								</copy>
-							</target>
-						</configuration>
-					</execution>
-
 				</executions>
 			</plugin>
+			<!-- <plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+	        	<version>3.1.0</version>
+				<executions>
+					<execution>
+			            <id>copy-resources</id>
+			            here the phase you need
+			            <phase>validate</phase>
+			            <goals>
+			              <goal>copy-resources</goal>
+			            </goals>
+			            <configuration>
+			              <outputDirectory>${basedir}/target/copiedFiles</outputDirectory>
+			              <resources>          
+			                <resource>
+			                  <directory>dist/</directory>
+			                  <filtering>true</filtering>
+			                </resource>
+			              </resources>              
+			            </configuration>            
+			          </execution>
+				</executions>
+			</plugin> -->
 		</plugins>
 	</build>
 </project>
