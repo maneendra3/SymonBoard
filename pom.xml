@@ -12,8 +12,8 @@
 	<version>201806.0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>symon-board-app</module>
 		<module>symon-board-view</module>
+		<module>symon-board-app</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
