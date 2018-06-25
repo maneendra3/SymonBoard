@@ -35,7 +35,7 @@
 			              <goal>copy-resources</goal>
 			            </goals>
 			            <configuration>
-			              <outputDirectory>${basedir}/src/resources/view-files</outputDirectory>
+			              <outputDirectory>${basedir}/src/main/resources/public</outputDirectory>
 			              <resources>          
 			                <resource>
 			                  <directory>../symon-board-view/dist</directory>
