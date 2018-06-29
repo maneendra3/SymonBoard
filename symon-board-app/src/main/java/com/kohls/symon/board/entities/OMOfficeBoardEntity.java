@@ -29,7 +29,8 @@ public class OMOfficeBoardEntity {
     private Integer avChts1;
     @Column(name = "AvailableChutesSorter2")
     private Integer avChts2;
-
+    @Column(name = "BlkChuts")
+    private Integer blkChuts;
     private Integer cartonsToOCSorter1;
     private Integer fullChutesSorter1;
     private Integer unitsSortedSorter2;
@@ -40,6 +41,7 @@ public class OMOfficeBoardEntity {
     private Integer completedChutes;
     private Integer fullChutesTotal;
     private Integer availableWavesTotal;
+
 
     public Integer getTask_id() {
         return task_id;
@@ -209,6 +211,14 @@ public class OMOfficeBoardEntity {
         this.availableWavesTotal = availableWavesTotal;
     }
 
+    public Integer getBlkChuts() {
+        return blkChuts;
+    }
+
+    public void setBlkChuts(Integer blkChuts) {
+        this.blkChuts = blkChuts;
+    }
+
     @Override
     public String toString() {
         return "OMOfficeBoardEntity{" +
@@ -223,6 +233,7 @@ public class OMOfficeBoardEntity {
                 ", compCht2=" + compCht2 +
                 ", avChts1=" + avChts1 +
                 ", avChts2=" + avChts2 +
+                ", blkChuts=" + blkChuts +
                 ", cartonsToOCSorter1=" + cartonsToOCSorter1 +
                 ", fullChutesSorter1=" + fullChutesSorter1 +
                 ", unitsSortedSorter2=" + unitsSortedSorter2 +

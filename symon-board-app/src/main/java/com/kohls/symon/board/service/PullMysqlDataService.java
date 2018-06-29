@@ -52,6 +52,7 @@ public class PullMysqlDataService {
             userEntity.setCompCht2(userMyEntity.getCompCht2());
             userEntity.setAvChts2(userMyEntity.getAvChts2());
             userEntity.setAvChts1(userMyEntity.getAvChts1());
+            userEntity.setBlkChuts(userMyEntity.getBlkChuts());
             userEntities.add(userEntity);
         } );
 

@@ -20,6 +20,7 @@ public class UserEntity {
     private Integer compCht2;
     private Integer avChts1;
     private Integer avChts2;
+    private  Integer blkChuts;
 
     public Integer getTask_id() {
         return task_id;
@@ -107,5 +108,13 @@ public class UserEntity {
 
     public void setAvChts2(Integer avChts2) {
         this.avChts2 = avChts2;
+    }
+
+    public Integer getBlkChuts() {
+        return blkChuts;
+    }
+
+    public void setBlkChuts(Integer blkChuts) {
+        this.blkChuts = blkChuts;
     }
 }
