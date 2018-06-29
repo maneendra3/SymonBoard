@@ -32,7 +32,6 @@ public class PullMysqlDataService {
         List<OMOfficeBoardEntity> userMyEntities=(List<OMOfficeBoardEntity>) mysqlUserRepository.findAll();
         logger.info("Copying Data From Mysql into mongoDB and Objects size="+userMyEntities.size());
         userEntities= copyUserMyEntities(userMyEntities);
-       System.out.println(userEntities.get(0).getAvBufln());
         userRepository.save(userEntities.get(0));
         logger.info("Copied Data into MongoDB="+userEntities.size());
 
