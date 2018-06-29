@@ -15,84 +15,72 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.github.eirslett</groupId>
-				<artifactId>frontend-maven-plugin</artifactId>
-				<version>1.6</version>
-				<executions>
-					<execution>
-						<id>install_npm</id>
-						<goals>
-							<goal>install-node-and-npm</goal>
-						</goals>
-						<phase>generate-resources</phase>
-						<configuration>
-							<nodeVersion>v8.9.4</nodeVersion>
-							<!-- <nodeDownloadRoot>http://merch-nexus.kohls.com:8080/content/repositories/thirdparty/com/kohls/tools/node/</nodeDownloadRoot> -->
-						</configuration>
-					</execution>
-					<!-- <execution>
-						<id>configure_npm_proxy</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<phase>generate-resources</phase>
-						<configuration>
-							<arguments>config set proxy http://proxy.kohls.com:3128/ config
-								set https-proxy http://proxy.kohls.com:3128/</arguments>
-						</configuration>
-					</execution> -->
-					<execution>
-						<id>configure_npm_registry</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<phase>generate-resources</phase>
-						<configuration>
-							<arguments>config set registry http://registry.npmjs.org/</arguments>
-						</configuration>
-					</execution>
-					<execution>
-						<id>npm install</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>npm run-script build</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<configuration>
-							<arguments>run-script build</arguments>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- <plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-	        	<version>3.1.0</version>
-				<executions>
-					<execution>
-			            <id>copy-resources</id>
-			            here the phase you need
-			            <phase>validate</phase>
-			            <goals>
-			              <goal>copy-resources</goal>
-			            </goals>
-			            <configuration>
-			              <outputDirectory>${basedir}/target/copiedFiles</outputDirectory>
-			              <resources>          
-			                <resource>
-			                  <directory>dist/</directory>
-			                  <filtering>true</filtering>
-			                </resource>
-			              </resources>              
-			            </configuration>            
-			          </execution>
-				</executions>
-			</plugin> -->
-		</plugins>
-	</build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <id>install_npm</id>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <nodeVersion>v8.9.4</nodeVersion>
+              <nodeDownloadRoot>http://merch-nexus.kohls.com:8080/content/repositories/thirdparty/com/kohls/tools/node/</nodeDownloadRoot>
+			  <workingDirectory>${basedir}/app</workingDirectory>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>configure_npm_proxy</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+			  <workingDirectory>${basedir}/app</workingDirectory>
+              <arguments>config set proxy http://proxy.kohls.com:3128/ config set https-proxy http://proxy.kohls.com:3128/</arguments>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>configure_npm_registry</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+			  <workingDirectory>${basedir}/app</workingDirectory>
+              <arguments>config set registry http://registry.npmjs.org/</arguments>
+            </configuration>
+          </execution>
+ 
+          <execution>
+            <id>npm install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+			<configuration>
+			<workingDirectory>${basedir}/app</workingDirectory>
+			</configuration>
+          </execution>
+
+          <execution>
+            <id>npm run build</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run build</arguments>
+			  <workingDirectory>${basedir}/app</workingDirectory>
+            </configuration>
+          </execution>
+        </executions>
+
+      </plugin>
+    </plugins>
+  </build>
 </project>
