@@ -5,6 +5,8 @@ import FourExTable from './FourExTable.jsx';
 import Time from './LiveTime.jsx';
 import axios from 'axios';
 
+import ReactLoading from 'react-loading';
+
   
 export default class App extends React.Component{
     constructor(props) {
@@ -55,13 +57,19 @@ export default class App extends React.Component{
          });
     }
     render() {
-        return (
-            <div className="">
-                <TwoExTable data={this.state.Q} />
-                <FourExTable hdata={this.state.sorter1_header} data={this.state.sorter1_data}/>
-                <FourExTable hdata={this.state.sorter2_header} data={this.state.sorter2_data}/>
-                <Time/>
-            </div>
-        );
+        if(!this.state.showView){
+            return (
+                <ReactLoading type="cubes" color="red" height={667} width={375} />
+            );
+        }else{
+            return (
+                <div className="">
+                    <TwoExTable data={this.state.Q} />
+                    <FourExTable hdata={this.state.sorter1_header} data={this.state.sorter1_data}/>
+                    <FourExTable hdata={this.state.sorter2_header} data={this.state.sorter2_data}/>
+                    <Time/>
+                </div>
+            );
+        }
     }
 };
