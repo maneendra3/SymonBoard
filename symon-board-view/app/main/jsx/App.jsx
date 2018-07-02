@@ -25,7 +25,7 @@ export default class App extends React.Component{
     }
     initializeInjection(currentThis){
         setInterval(function(){
-            axios.get("/dd")
+            axios.get("/getLEDOffice/")
             .then(function (response) {
                 if (response.data.statusCode === 200) {
                     //purgeData(response.data);
