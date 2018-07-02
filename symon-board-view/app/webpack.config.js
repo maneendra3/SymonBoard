@@ -5,7 +5,7 @@ var packageJson = require('./package.json');
 var APP_SRC_DIR = path.resolve(__dirname, 'main/jsx');
 
 const APP_BUILD_PATHS = {
-		  build: path.join(__dirname, '../src', 'main', 'resources','public', packageJson.name)
+		  build: path.join(__dirname, '../../symon-board-app/src', 'main', 'resources','public', packageJson.name)
 		};
 console.log("__dirname : " ,__dirname);
 console.log("path.join() : " ,APP_BUILD_PATHS);

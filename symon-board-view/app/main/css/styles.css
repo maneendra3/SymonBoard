@@ -1,13 +1,18 @@
 /*styles*/
-	@font-face {
+	/*@font-face {
 		font-family: LCDDot;
 		src: url('../fonts/lcddot.ttf');
-	}
+	}*/
 	
 	body{font-family:LCDDot,sans-serif;background:black;color:white;}
 	table th{text-align:left; font-size:1.2em}
-	table td:nth-child(2n+2),table th:nth-child(2n+2){color:red; }
-	/*line*/
-    table td:nth-child(1),table th:nth-child(1){border-left:3px solid red; padding-left:10px }
+	/* table td:nth-child(2n+2),table th:nth-child(2n+2){color:green; } */
+	table.red-head th{color:red; } .red, .red span{color:red} .green{color:green;}
+
+	/*line*/table td{color:green;}
+	table.line-first-col td:nth-child(1):empty, table.line-first-col th:nth-child(1):empty{border:0px;}
+	table, table td:empty, table th:empty{border:0px}
+    table.line-first-col td:nth-child(1),table.line-first-col th:nth-child(1){border-left:3px solid red; padding-left:10px }
 	.bottom-left{position:absolute; left:20px; bottom:20px;font-size:1.5em;}
 	.font1x5{font-size:1.5em;}.font2x5{font-size:2.5em;}
+	.time{background: rgba(0,0,0,0.8)}
