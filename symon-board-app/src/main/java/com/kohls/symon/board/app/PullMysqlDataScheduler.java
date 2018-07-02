@@ -4,8 +4,8 @@ package com.kohls.symon.board.app;
 import com.kohls.symon.board.controller.RequestController;
 import com.kohls.symon.board.dao.MysqlUserRepository;
 import com.kohls.symon.board.dao.UserRepository;
-import com.kohls.symon.board.entities.OMOfficeBoardEntity;
-import com.kohls.symon.board.entities.UserEntity;
+import com.kohls.symon.board.entities.LEDOfficeBoardEntity;
+import com.kohls.symon.board.entities.LEDOfficeMongoEntity;
 import com.kohls.symon.board.entities.UserMyEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,21 +31,21 @@ public class PullMysqlDataScheduler {
 
     @Scheduled(fixedDelay = 5000)
     //@Scheduled(fixedRate = 5000)  //Or use this
-    public void demoServiceMethod()
+    public void copyLEDOfficeData()
     {
-        List<UserEntity> userEntities=new ArrayList<>();
+        List<LEDOfficeMongoEntity> userEntities=new ArrayList<>();
         logger.info("Pulling Data From Mysql");
-        List<OMOfficeBoardEntity> userMyEntities=(List<OMOfficeBoardEntity>) mysqlUserRepository.findAll();
+        List<LEDOfficeBoardEntity> userMyEntities=(List<LEDOfficeBoardEntity>) mysqlUserRepository.findAll();
         logger.info("Copying Data From Mysql into mongoDB and Objects size="+userMyEntities.size());
         userEntities= copyUserMyEntities(userMyEntities);
         userEntities=userRepository.saveAll(userEntities);
         logger.info("Copied Data into MongoDB="+userMyEntities.size());
     }
 
-    private List<UserEntity> copyUserMyEntities(List<OMOfficeBoardEntity> userMyEntities){
-        List<UserEntity> userEntities=new ArrayList<>();
+    private List<LEDOfficeMongoEntity> copyUserMyEntities(List<LEDOfficeBoardEntity> userMyEntities){
+        List<LEDOfficeMongoEntity> userEntities=new ArrayList<>();
         userMyEntities.forEach(userMyEntity ->{
-            UserEntity userEntity=new UserEntity();
+            LEDOfficeMongoEntity userEntity=new LEDOfficeMongoEntity();
             userEntity.setTask_id(userMyEntity.getTask_id());
             userEntity.setSrtd(userMyEntity.getSrtd());
             userEntity.setOccrtns(userMyEntity.getOccrtns());

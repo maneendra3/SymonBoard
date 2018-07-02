@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ledoffice")
-public class OMOfficeBoardEntity {
+public class LEDOfficeBoardEntity {
 
     @Id
     @GeneratedValue
@@ -221,7 +221,7 @@ public class OMOfficeBoardEntity {
 
     @Override
     public String toString() {
-        return "OMOfficeBoardEntity{" +
+        return "LEDOfficeBoardEntity{" +
                 "task_id=" + task_id +
                 ", srtd=" + srtd +
                 ", occrtns=" + occrtns +
