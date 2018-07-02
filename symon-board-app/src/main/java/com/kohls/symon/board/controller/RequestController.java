@@ -34,16 +34,15 @@ public class RequestController {
 	private MongoLEDBoardRepository ledBoardRepository;
 
 
-	@GetMapping("/getLEDOffice/{region}")
-	public  Map<String,Object> requestMethod(@PathVariable("region") String region) {
-		logger.info("Calling Request Method="+region);
+	@GetMapping(value={"/getLEDOffice"})
+	public  Map<String,Object> requestMethod() {
+		logger.info("Calling Request Method");
         Map<String,Object> ledData=new HashMap<>();
         List<LEDOfficeMongoEntity> userEntities=new ArrayList<>();
         List<LEDBoardMongoEntity> ledBoard=new ArrayList<>();
 		try {
             userEntities = mongoLEDOfficeRepository.findAll();
-            System.out.println("Size="+ledBoardRepository.findAll().size());
-			ledBoard = StringUtils.isEmpty(region)?ledBoardRepository.findAll() :ledBoardRepository.findAllByLedLocation(region);
+            ledBoard= ledBoardRepository.findAll();
             ledData= LEDUtils.ledOfficeData(userEntities);
             ledData.put("ledBoard",ledBoard);
         }catch (Exception ex){

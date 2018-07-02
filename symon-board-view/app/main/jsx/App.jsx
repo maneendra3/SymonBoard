@@ -27,8 +27,10 @@ export default class App extends React.Component{
         setInterval(function(){
             axios.get("/getLEDOffice/")
             .then(function (response) {
+                
                 if (response.data.statusCode === 200) {
                     //purgeData(response.data);
+
                 } else {
                     //purgeData(response.data.statusCode);
                 }
