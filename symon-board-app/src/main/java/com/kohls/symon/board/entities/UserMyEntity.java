@@ -47,7 +47,7 @@ public class UserMyEntity {
 
     @Override
     public String toString() {
-        return "UserEntity{" +
+        return "LEDOfficeMongoEntity{" +
                 "userId='" + userId + '\'' +
                 ", name='" + name + '\'' +
                 ", creationDate=" + creationDate +

@@ -1,30 +1,27 @@
 package com.kohls.symon.board.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import  java.util.Date;
 
 @Document
-public class UserEntity {
+public class LEDOfficeMongoEntity {
 
     @Id
-    private Integer task_id;
-    private Integer srtd;
-    private Integer occrtns;
-    private Integer avBufln;
-    private Integer srate1;
-    private Integer srate2;
-    private Integer ttl_RT;
-    private Integer compCht1;
-    private Integer compCht2;
-    private Integer avChts1;
-    private Integer avChts2;
-    private  Integer blkChuts;
-
-    public Integer getTask_id() {
-        return task_id;
-    }
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    public Integer task_id;
+    public Integer srtd;
+    public Integer occrtns;
+    public Integer avBufln;
+    public Integer srate1;
+    public Integer srate2;
+    public Integer ttl_RT;
+    public Integer compCht1;
+    public Integer compCht2;
+    public Integer avChts1;
+    public Integer avChts2;
+    public  Integer blkChuts;
 
     public void setTask_id(Integer task_id) {
         this.task_id = task_id;
