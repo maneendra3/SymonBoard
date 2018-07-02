@@ -1,1 +1,5 @@
 /symon-board-app/target
+/symon-board-view/target
+/symon-board-view/app/node
+/symon-board-view/app/node_modules
+/.idea

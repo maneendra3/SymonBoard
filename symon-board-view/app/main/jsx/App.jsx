@@ -57,19 +57,21 @@ export default class App extends React.Component{
          });
     }
     render() {
-        if(!this.state.showView){
-            return (
-                <ReactLoading type="cubes" color="red" height={667} width={375} />
-            );
-        }else{
-            return (
-                <div className="">
-                    <TwoExTable data={this.state.Q} />
-                    <FourExTable hdata={this.state.sorter1_header} data={this.state.sorter1_data}/>
-                    <FourExTable hdata={this.state.sorter2_header} data={this.state.sorter2_data}/>
-                    <Time/>
-                </div>
-            );
-        }
+        return (
+            <div>
+                { 
+                    this.state.showView ? (
+                        <div className="">
+                            <TwoExTable data={this.state.Q} />
+                            <FourExTable hdata={this.state.sorter1_header} data={this.state.sorter1_data}/>
+                            <FourExTable hdata={this.state.sorter2_header} data={this.state.sorter2_data}/>
+                            <Time/>
+                        </div>
+                    ) : (
+                        <ReactLoading type="cubes" color="red" height={100} width={650} />
+                    )
+                }
+            </div>
+        );
     }
 };
