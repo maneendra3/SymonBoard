@@ -27,26 +27,35 @@ export default class App extends React.Component{
         setInterval(function(){
             axios.get("/getLEDOffice/")
             .then(function (response) {
-                
-                if (response.data.statusCode === 200) {
-                    //purgeData(response.data);
-
-                } else {
-                    //purgeData(response.data.statusCode);
+                if(response.status==200) {
+                    const data =
+                        {
+                            q1: response.data.ledOffice,
+                            s1h: ["Sorter1", "PKD", "SRT"],
+                            s1d: response.data.LEDBoardWest,
+                            s2h: ["Sorter2", "PKD", "SRT"],
+                            s2d: response.data.LEDBoardEast
+                        }
+                    currentThis.updateView(data);
+                }else{
+                    console.log('Serivce Error'+response.status);
+                    currentThis.updateView(response);
                 }
+
+
             })
             .catch(function (error) {
-                const data = 
+                /*const data =
                     {
                         q1:[{KEY:"srtd",VALUE:3},{KEY:"occrtns",VALUE:5},{KEY:"avBufln",VALUE:5},{KEY:"srate1",VALUE:4},{KEY:"srate2",VALUE:3},{KEY:"ttl_RT",VALUE:4},{KEY:"compCht1",VALUE:2},{KEY:"compCht2",VALUE:54},{KEY:"avChts1",VALUE:4},{KEY:"avChts2",VALUE:5}],
                         s1h:["Sorter1","PKD","SRT"],
                         s1d:[{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"}],
                         s2h:["Sorter2","PKD","SRT"],
                         s2d:[{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"}]
-                };
-                currentThis.updateView(data);
+                };*/
+                currentThis.updateView(error);
             });
-        }, 10000);
+        }, 60000);
     }
     updateView(viewData) {
         this.setState({ 
@@ -54,7 +63,7 @@ export default class App extends React.Component{
             Q: viewData.q1,
             sorter1_data: viewData.s1d,
             sorter2_data: viewData.s2d,
-            sorter1_header: viewData.s2h,
+            sorter1_header: viewData.s1h,
             sorter2_header: viewData.s2h
          });
     }

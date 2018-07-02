@@ -3,7 +3,9 @@ package com.kohls.symon.board.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LEDOffice {
+    @JsonProperty("KEY")
     private String key;
+    @JsonProperty("VALUE")
     private Object value;
 
     public LEDOffice(String key, Object value) {

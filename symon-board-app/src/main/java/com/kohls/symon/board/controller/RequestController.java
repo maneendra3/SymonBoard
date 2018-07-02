@@ -43,8 +43,8 @@ public class RequestController {
 		try {
             userEntities = mongoLEDOfficeRepository.findAll();
             ledBoard= ledBoardRepository.findAll();
-            ledData= LEDUtils.ledOfficeData(userEntities);
-            ledData.put("ledBoard",ledBoard);
+            ledData= LEDUtils.ledOfficeData(userEntities,ledBoard);
+           // ledData.put("ledBoard",ledBoard);
         }catch (Exception ex){
 		    ex.printStackTrace();
         }

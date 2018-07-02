@@ -12,9 +12,11 @@ import java.util.Map;
 
 public class LEDUtils {
 
-    public static Map<String,Object> ledOfficeData(List<LEDOfficeMongoEntity> ledOfficeMongoEntities) throws  Exception{
+    public static Map<String,Object> ledOfficeData(List<LEDOfficeMongoEntity> ledOfficeMongoEntities,List<LEDBoardMongoEntity> ledBoard) throws  Exception{
         Map<String,Object> ledData=new HashMap<>();
         List<LEDOffice> ledOffices=new ArrayList<>();
+        List<LEDBoardMongoEntity> ledBoardWestData=new ArrayList<>();
+        List<LEDBoardMongoEntity> ledBoardEASTData=new ArrayList<>();
         ledOfficeMongoEntities.forEach(ledOfficeMongoEntity -> {
             try {
                 Field[] allFields =ledOfficeMongoEntity.getClass().getDeclaredFields();
@@ -25,7 +27,21 @@ public class LEDUtils {
                 ex.printStackTrace();
             }
         });
+        setLEDBoardData(ledBoardWestData,ledBoardEASTData,ledBoard);
         ledData.put("ledOffice",ledOffices);
+        ledData.put("LEDBoardWest",ledBoardWestData);
+        ledData.put("LEDBoardEast",ledBoardEASTData);
         return  ledData;
     }
+    private static void setLEDBoardData(List<LEDBoardMongoEntity> ledBoardWestData,List<LEDBoardMongoEntity> ledBoardEASTData,List<LEDBoardMongoEntity> ledBoard){
+        ledBoard.forEach(ledBoardMongoEntity -> {
+            if("west".equalsIgnoreCase(ledBoardMongoEntity.getLedLocation())){
+                ledBoardWestData.add(ledBoardMongoEntity);
+            }
+            if ("east".equalsIgnoreCase(ledBoardMongoEntity.getLedLocation())){
+                ledBoardEASTData.add(ledBoardMongoEntity);
+            }
+        });
+    }
+
 }
