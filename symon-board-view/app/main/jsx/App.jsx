@@ -55,7 +55,7 @@ export default class App extends React.Component{
                 };*/
                 currentThis.updateView(error);
             });
-        }, 60000);
+        }, 1000);
     }
     updateView(viewData) {
         this.setState({ 
