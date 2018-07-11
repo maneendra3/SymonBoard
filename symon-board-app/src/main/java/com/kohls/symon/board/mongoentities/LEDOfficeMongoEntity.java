@@ -1,51 +1,52 @@
-package com.kohls.symon.board.entities;
+package com.kohls.symon.board.mongoentities;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "ledoffice")
-public class LEDOfficeBoardEntity {
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
+public class LEDOfficeMongoEntity {
 
     @Id
-    @GeneratedValue
-    private Integer task_id;
-    @Column(name = "UnitsSortedTotal")
-    private Integer srtd;
-    @Column(name = "CartonsToOCTotal")
-    private Integer occrtns;
-    @Column(name = "AvailableBufferLanesTotal")
-    private Integer avBufln;
-    @Column(name = "SortRateSorter1")
-    private Integer srate1;
-    @Column(name = "SortRateSorter2")
-    private Integer srate2;
-    @Column(name = "SortRateTotal")
-    private Integer ttl_RT;
-    @Column(name = "CompletedChutesSorter1")
-    private Integer compCht1;
-    @Column(name = "CompletedChutesSorter2")
-    private Integer compCht2;
-    @Column(name = "AvailableChutesSorter1")
-    private Integer avChts1;
-    @Column(name = "AvailableChutesSorter2")
-    private Integer avChts2;
-    @Column(name = "BlkChuts")
-    private Integer blkChuts;
-    private Integer cartonsToOCSorter1;
-    private Integer fullChutesSorter1;
-    private Integer unitsSortedSorter2;
-    private Integer unitsSortedSorter1;
-    private Integer cartonsToOCSorter2;
-    private Integer fullChutesSorter2;
-    private Integer availableChutes;
-    private Integer completedChutes;
-    private Integer fullChutesTotal;
-    private Integer availableWavesTotal;
-
-
-    public Integer getTask_id() {
-        return task_id;
-    }
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    public Integer task_id;
+    public Integer srtd;
+    public Integer occrtns;
+    public Integer avBufln;
+    public Integer srate1;
+    public Integer srate2;
+    public Integer ttl_RT;
+    public Integer compCht1;
+    public Integer compCht2;
+    public Integer avChts1;
+    public Integer avChts2;
+    public  Integer blkChuts;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer cartonsToOCSorter1;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer fullChutesSorter1;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer unitsSortedSorter2;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer unitsSortedSorter1;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer cartonsToOCSorter2;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer fullChutesSorter2;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer availableChutes;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer completedChutes;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer fullChutesTotal;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer availableWavesTotal;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer cartonsToOcTotal;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String lastUpdated;
 
     public void setTask_id(Integer task_id) {
         this.task_id = task_id;
@@ -131,6 +132,18 @@ public class LEDOfficeBoardEntity {
         this.avChts2 = avChts2;
     }
 
+    public Integer getBlkChuts() {
+        return blkChuts;
+    }
+
+    public void setBlkChuts(Integer blkChuts) {
+        this.blkChuts = blkChuts;
+    }
+
+    public Integer getTask_id() {
+        return task_id;
+    }
+
     public Integer getCartonsToOCSorter1() {
         return cartonsToOCSorter1;
     }
@@ -211,17 +224,25 @@ public class LEDOfficeBoardEntity {
         this.availableWavesTotal = availableWavesTotal;
     }
 
-    public Integer getBlkChuts() {
-        return blkChuts;
+    public Integer getCartonsToOcTotal() {
+        return cartonsToOcTotal;
     }
 
-    public void setBlkChuts(Integer blkChuts) {
-        this.blkChuts = blkChuts;
+    public void setCartonsToOcTotal(Integer cartonsToOcTotal) {
+        this.cartonsToOcTotal = cartonsToOcTotal;
+    }
+
+    public String getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(String lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     @Override
     public String toString() {
-        return "LEDOfficeBoardEntity{" +
+        return "LEDOfficeMongoEntity{" +
                 "task_id=" + task_id +
                 ", srtd=" + srtd +
                 ", occrtns=" + occrtns +
@@ -244,6 +265,8 @@ public class LEDOfficeBoardEntity {
                 ", completedChutes=" + completedChutes +
                 ", fullChutesTotal=" + fullChutesTotal +
                 ", availableWavesTotal=" + availableWavesTotal +
+                ", cartonsToOcTotal=" + cartonsToOcTotal +
+                ", lastUpdated='" + lastUpdated + '\'' +
                 '}';
     }
 }

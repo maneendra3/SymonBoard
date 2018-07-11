@@ -21,41 +21,39 @@ export default class App extends React.Component{
             sorter1_header: [],
             sorter2_header: []
         }
+        this.inject = function (curThis) {
+            axios.get("/getLEDOffice/")
+                .then(function (response) {
+                    if(response.status==200) {
+                        const data =
+                            {
+                                q1: response.data.ledOffice,
+                                s1h: ["Sorter1", "PKD", "SRT"],
+                                s1d: response.data.LEDBoardWest,
+                                s2h: ["Sorter2", "PKD", "SRT"],
+                                s2d: response.data.LEDBoardEast
+                            }
+                        curThis.updateView(data);
+                    }else{
+                        console.log('Serivce Error'+response.status);
+                        curThis.updateView(response);
+                    }
+
+
+                })
+                .catch(function (error) {
+                    curThis.updateView(error);
+                });
+        }.bind(this);
+        this.inject(this);
         this.initializeInjection(this);
     }
     initializeInjection(currentThis){
+        var refThis = currentThis;
         setInterval(function(){
-            axios.get("/getLEDOffice/")
-            .then(function (response) {
-                if(response.status==200) {
-                    const data =
-                        {
-                            q1: response.data.ledOffice,
-                            s1h: ["Sorter1", "PKD", "SRT"],
-                            s1d: response.data.LEDBoardWest,
-                            s2h: ["Sorter2", "PKD", "SRT"],
-                            s2d: response.data.LEDBoardEast
-                        }
-                    currentThis.updateView(data);
-                }else{
-                    console.log('Serivce Error'+response.status);
-                    currentThis.updateView(response);
-                }
-
-
-            })
-            .catch(function (error) {
-                /*const data =
-                    {
-                        q1:[{KEY:"srtd",VALUE:3},{KEY:"occrtns",VALUE:5},{KEY:"avBufln",VALUE:5},{KEY:"srate1",VALUE:4},{KEY:"srate2",VALUE:3},{KEY:"ttl_RT",VALUE:4},{KEY:"compCht1",VALUE:2},{KEY:"compCht2",VALUE:54},{KEY:"avChts1",VALUE:4},{KEY:"avChts2",VALUE:5}],
-                        s1h:["Sorter1","PKD","SRT"],
-                        s1d:[{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"}],
-                        s2h:["Sorter2","PKD","SRT"],
-                        s2d:[{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"},{"sorter":"0","pkd":"0","srt":"0"}]
-                };*/
-                currentThis.updateView(error);
-            });
-        }, 1000);
+            console.log('Interval..')
+            refThis.inject(refThis);
+        }, 60000);
     }
     updateView(viewData) {
         this.setState({ 
