@@ -1,7 +1,6 @@
 package com.kohls.symon.board.dao;
 
-import com.kohls.symon.board.entities.LEDBoardEntity;
-import com.kohls.symon.board.entities.LEDOfficeBoardEntity;
+import com.kohls.symon.board.sqlentities.LEDBoardEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

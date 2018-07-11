@@ -1,7 +1,7 @@
 package com.kohls.symon.board.utils;
 
-import com.kohls.symon.board.entities.LEDBoardMongoEntity;
-import com.kohls.symon.board.entities.LEDOfficeMongoEntity;
+import com.kohls.symon.board.mongoentities.LEDBoardMongoEntity;
+import com.kohls.symon.board.mongoentities.LEDOfficeMongoEntity;
 import com.kohls.symon.board.model.LEDOffice;
 
 import java.lang.reflect.Field;
@@ -21,6 +21,7 @@ public class LEDUtils {
             try {
                 Field[] allFields =ledOfficeMongoEntity.getClass().getDeclaredFields();
                 for (Field field :allFields) {
+                    if(field.get(ledOfficeMongoEntity)!=null)
                     ledOffices.add(new LEDOffice(field.getName(),field.get(ledOfficeMongoEntity)));
                 }
             }catch (Exception ex){

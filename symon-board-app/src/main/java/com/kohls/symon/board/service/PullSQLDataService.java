@@ -4,12 +4,13 @@ import com.kohls.symon.board.dao.LEDBoardRepository;
 import com.kohls.symon.board.dao.MongoLEDBoardRepository;
 import com.kohls.symon.board.dao.SQLLEDOfficeRepository;
 import com.kohls.symon.board.dao.MongoLEDOfficeRepository;
-import com.kohls.symon.board.entities.LEDBoardEntity;
-import com.kohls.symon.board.entities.LEDBoardMongoEntity;
-import com.kohls.symon.board.entities.LEDOfficeBoardEntity;
-import com.kohls.symon.board.entities.LEDOfficeMongoEntity;
+import com.kohls.symon.board.sqlentities.LEDBoardEntity;
+import com.kohls.symon.board.mongoentities.LEDBoardMongoEntity;
+import com.kohls.symon.board.sqlentities.LEDOfficeBoardEntity;
+import com.kohls.symon.board.mongoentities.LEDOfficeMongoEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,7 +60,7 @@ public class PullSQLDataService {
         List<LEDOfficeMongoEntity> userEntities=new ArrayList<>();
         userMyEntities.forEach(userMyEntity ->{
             LEDOfficeMongoEntity LEDOfficeMongoEntity =new LEDOfficeMongoEntity();
-            LEDOfficeMongoEntity.setTask_id(userMyEntity.getTask_id());
+            /*LEDOfficeMongoEntity.setTask_id(userMyEntity.getTask_id());
             LEDOfficeMongoEntity.setSrtd(userMyEntity.getSrtd());
             LEDOfficeMongoEntity.setOccrtns(userMyEntity.getOccrtns());
             LEDOfficeMongoEntity.setAvBufln(userMyEntity.getAvBufln());
@@ -70,7 +71,8 @@ public class PullSQLDataService {
             LEDOfficeMongoEntity.setCompCht2(userMyEntity.getCompCht2());
             LEDOfficeMongoEntity.setAvChts2(userMyEntity.getAvChts2());
             LEDOfficeMongoEntity.setAvChts1(userMyEntity.getAvChts1());
-            LEDOfficeMongoEntity.setBlkChuts(userMyEntity.getBlkChuts());
+            LEDOfficeMongoEntity.setBlkChuts(userMyEntity.getBlkChuts());*/
+            BeanUtils.copyProperties(userMyEntity,LEDOfficeMongoEntity);
             userEntities.add(LEDOfficeMongoEntity);
         } );
 
@@ -81,11 +83,18 @@ public class PullSQLDataService {
         List<LEDBoardMongoEntity> ledBoardMongoEntities=new ArrayList<>();
         ledBoardEntities.forEach(ledBoardEntity -> {
             LEDBoardMongoEntity ledBoardMongoEntity=new LEDBoardMongoEntity();
-            ledBoardMongoEntity.setTask_id(ledBoardEntity.getTask_id());
-            ledBoardMongoEntity.setLedLocation(ledBoardEntity.getLedLocation());
+            /*ledBoardMongoEntity.setTask_id(ledBoardEntity.getTask_id());
             ledBoardMongoEntity.setPkd(ledBoardEntity.getPkd());
             ledBoardMongoEntity.setSorter(ledBoardEntity.getSorter());
             ledBoardMongoEntity.setSrt(ledBoardEntity.getSrt());
+            ledBoardMongoEntity.setPackWave(ledBoardEntity.getPackWave());
+            ledBoardMongoEntity.setStatus(ledBoardEntity.getStatus());
+            ledBoardMongoEntity.setMsgTotes(ledBoardEntity.getMsgTotes());
+            ledBoardMongoEntity.setChutes(ledBoardEntity.getChutes());
+            ledBoardMongoEntity.setDuration(ledBoardEntity.getDuration());
+            ledBoardMongoEntity.setAvailableChutes(ledBoardEntity.getAvailableChutes());
+            ledBoardMongoEntity.setCompletedChutes();*/
+            BeanUtils.copyProperties(ledBoardEntity,ledBoardMongoEntity);
             ledBoardMongoEntities.add(ledBoardMongoEntity);
         });
         return  ledBoardMongoEntities;

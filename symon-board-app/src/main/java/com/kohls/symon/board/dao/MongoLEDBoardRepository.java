@@ -1,7 +1,6 @@
 package com.kohls.symon.board.dao;
 
-import com.kohls.symon.board.entities.LEDBoardEntity;
-import com.kohls.symon.board.entities.LEDBoardMongoEntity;
+import com.kohls.symon.board.mongoentities.LEDBoardMongoEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
