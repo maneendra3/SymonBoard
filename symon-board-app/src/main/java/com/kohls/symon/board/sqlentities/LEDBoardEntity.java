@@ -3,34 +3,20 @@ package com.kohls.symon.board.sqlentities;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "LEDBoard")
+
 public class LEDBoardEntity {
 
-    @Id
-    @GeneratedValue
     private Integer task_id; ;
-    @Column(name = "Picked",nullable = false)
     private Float  pkd ;
-    @Column(name = "Sorted",nullable = false)
     private Float  srt;
-    @Column(name = "PackWave",nullable = false)
     private String packWave;
-    @Column(name = "Status",nullable = false)
     private String status;
-    @Column(name = "MsgTotes",nullable = false)
     private Integer msgTotes;
-    @Column(name = "Chutes",nullable = false)
     private Integer chutes;
-    @Column(name = "Duration")
     private String duration;
-    @Column(name = "AvailableChutes")
     private Integer availableChutes;
-    @Column(name = "CompletedChutes")
     private Integer completedChutes;
-    @Column(name = "FullChutes")
     private Integer fullChutes;
-    @Column(name = "LEDLocation")
     private String ledLocation;
 
     public Integer getTask_id() {

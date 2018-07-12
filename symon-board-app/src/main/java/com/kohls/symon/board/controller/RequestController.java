@@ -2,7 +2,6 @@ package com.kohls.symon.board.controller;
 
 import com.kohls.symon.board.dao.MongoLEDBoardRepository;
 import com.kohls.symon.board.dao.MongoLEDOfficeRepository;
-import com.kohls.symon.board.dao.SQLLEDOfficeRepository;
 import com.kohls.symon.board.mongoentities.LEDBoardMongoEntity;
 import com.kohls.symon.board.mongoentities.LEDOfficeMongoEntity;
 import com.kohls.symon.board.utils.LEDUtils;
@@ -30,6 +29,7 @@ public class RequestController {
 	private MongoLEDBoardRepository ledBoardRepository;
 
 
+
 	@GetMapping(value={"/getLEDOffice"})
 	public  Map<String,Object> requestMethod() {
         Map<String,Object> ledData=new HashMap<>();
@@ -37,7 +37,6 @@ public class RequestController {
         List<LEDBoardMongoEntity> ledBoard=new ArrayList<>();
 		try {
             ledOfficeData = mongoLEDOfficeRepository.getAll();
-           // ledBoard= ledBoardRepository.findAll();
             Sort sort = new Sort(Sort.Direction.ASC, "lastUpdated");
             ledBoard=ledBoardRepository.getByLedLocation(sort);
             ledData= LEDUtils.ledOfficeData(ledOfficeData,ledBoard);

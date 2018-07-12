@@ -1,19 +1,22 @@
 package com.kohls.symon.board.service;
 
-import com.kohls.symon.board.dao.LEDBoardRepository;
+import com.kohls.symon.board.dao.LEDBoardMapper;
+import com.kohls.symon.board.dao.LEDOfficeMapper;
 import com.kohls.symon.board.dao.MongoLEDBoardRepository;
-import com.kohls.symon.board.dao.SQLLEDOfficeRepository;
 import com.kohls.symon.board.dao.MongoLEDOfficeRepository;
-import com.kohls.symon.board.sqlentities.LEDBoardEntity;
 import com.kohls.symon.board.mongoentities.LEDBoardMongoEntity;
-import com.kohls.symon.board.sqlentities.LEDOfficeBoardEntity;
 import com.kohls.symon.board.mongoentities.LEDOfficeMongoEntity;
+import com.kohls.symon.board.sqlentities.LEDBoardEntity;
+import com.kohls.symon.board.sqlentities.LEDOfficeBoardEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,21 +28,28 @@ public class PullSQLDataService {
     @Autowired
     MongoLEDOfficeRepository mongoLEDOfficeRepository;
 
-    @Autowired
+    /*@Autowired
     SQLLEDOfficeRepository SQLLEDOfficeRepository;
 
     @Autowired
-    LEDBoardRepository ledBoardRepository;
+    LEDBoardRepository ledBoardRepository;*/
 
     @Autowired
     private MongoLEDBoardRepository mongoLEDBoardRepository;
+
+    @Autowired
+    private EntityManager entityManager;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     public void copyLEDOfficeData()
     {
         logger.info("Migrating Data From SQL LEDOffice Table to LEDOffice of Mongo DB ");
         List<LEDOfficeMongoEntity> ledOfficeMongoEntities=new ArrayList<>();
-        List<LEDOfficeBoardEntity> ledOfficeEntities=(List<LEDOfficeBoardEntity>) SQLLEDOfficeRepository.findAll();
-        ledOfficeMongoEntities= copyLedOfficeData(ledOfficeEntities);
+        List<LEDOfficeBoardEntity> ledBoardEntities=(List<LEDOfficeBoardEntity>)jdbcTemplate.query("Select * from LEDOffice",new LEDOfficeMapper());
+        ledOfficeMongoEntities= copyLedOfficeData(ledBoardEntities);
+        mongoLEDOfficeRepository.deleteAll();
         mongoLEDOfficeRepository.saveAll(ledOfficeMongoEntities);
         logger.info("Copied Data into MongoDB="+ledOfficeMongoEntities.size());
 
@@ -47,8 +57,9 @@ public class PullSQLDataService {
 
     public void copyLEDBoardData(){
         logger.info("Migrating Data From SQL LED Board Table to LED Board of Mongo DB ");
-        List<LEDBoardEntity> ledBoardEntities= (List<LEDBoardEntity>)ledBoardRepository.findAll();
+        List<LEDBoardEntity> ledBoardEntities=(List<LEDBoardEntity>)jdbcTemplate.query("Select * from LEDBoard",new LEDBoardMapper());
         List<LEDBoardMongoEntity> ledBoardMongoEntities=copyLEDBoardData(ledBoardEntities);
+        mongoLEDBoardRepository.deleteAll();
         mongoLEDBoardRepository.saveAll(ledBoardMongoEntities);
         logger.info("Copied Data into MongoDB="+ledBoardMongoEntities.size());
 
@@ -60,18 +71,6 @@ public class PullSQLDataService {
         List<LEDOfficeMongoEntity> userEntities=new ArrayList<>();
         userMyEntities.forEach(userMyEntity ->{
             LEDOfficeMongoEntity LEDOfficeMongoEntity =new LEDOfficeMongoEntity();
-            /*LEDOfficeMongoEntity.setTask_id(userMyEntity.getTask_id());
-            LEDOfficeMongoEntity.setSrtd(userMyEntity.getSrtd());
-            LEDOfficeMongoEntity.setOccrtns(userMyEntity.getOccrtns());
-            LEDOfficeMongoEntity.setAvBufln(userMyEntity.getAvBufln());
-            LEDOfficeMongoEntity.setSrate1(userMyEntity.getSrate1());
-            LEDOfficeMongoEntity.setSrate2(userMyEntity.getSrate2());
-            LEDOfficeMongoEntity.setTtl_RT(userMyEntity.getTtl_RT());
-            LEDOfficeMongoEntity.setCompCht1(userMyEntity.getCompCht1());
-            LEDOfficeMongoEntity.setCompCht2(userMyEntity.getCompCht2());
-            LEDOfficeMongoEntity.setAvChts2(userMyEntity.getAvChts2());
-            LEDOfficeMongoEntity.setAvChts1(userMyEntity.getAvChts1());
-            LEDOfficeMongoEntity.setBlkChuts(userMyEntity.getBlkChuts());*/
             BeanUtils.copyProperties(userMyEntity,LEDOfficeMongoEntity);
             userEntities.add(LEDOfficeMongoEntity);
         } );
@@ -83,17 +82,6 @@ public class PullSQLDataService {
         List<LEDBoardMongoEntity> ledBoardMongoEntities=new ArrayList<>();
         ledBoardEntities.forEach(ledBoardEntity -> {
             LEDBoardMongoEntity ledBoardMongoEntity=new LEDBoardMongoEntity();
-            /*ledBoardMongoEntity.setTask_id(ledBoardEntity.getTask_id());
-            ledBoardMongoEntity.setPkd(ledBoardEntity.getPkd());
-            ledBoardMongoEntity.setSorter(ledBoardEntity.getSorter());
-            ledBoardMongoEntity.setSrt(ledBoardEntity.getSrt());
-            ledBoardMongoEntity.setPackWave(ledBoardEntity.getPackWave());
-            ledBoardMongoEntity.setStatus(ledBoardEntity.getStatus());
-            ledBoardMongoEntity.setMsgTotes(ledBoardEntity.getMsgTotes());
-            ledBoardMongoEntity.setChutes(ledBoardEntity.getChutes());
-            ledBoardMongoEntity.setDuration(ledBoardEntity.getDuration());
-            ledBoardMongoEntity.setAvailableChutes(ledBoardEntity.getAvailableChutes());
-            ledBoardMongoEntity.setCompletedChutes();*/
             BeanUtils.copyProperties(ledBoardEntity,ledBoardMongoEntity);
             ledBoardMongoEntities.add(ledBoardMongoEntity);
         });

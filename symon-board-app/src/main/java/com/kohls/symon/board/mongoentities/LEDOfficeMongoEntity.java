@@ -9,9 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class LEDOfficeMongoEntity {
 
-    @Id
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    public Integer task_id;
+
     public Integer srtd;
     public Integer occrtns;
     public Integer avBufln;
@@ -24,33 +22,41 @@ public class LEDOfficeMongoEntity {
     public Integer avChts2;
     public  Integer blkChuts;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Integer cartonsToOCSorter1;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Integer fullChutesSorter1;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Integer unitsSortedSorter2;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Integer unitsSortedSorter1;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Integer cartonsToOCSorter2;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Integer fullChutesSorter2;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Integer availableChutes;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Integer completedChutes;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Integer fullChutesTotal;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Integer availableWavesTotal;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Integer cartonsToOcTotal;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public String lastUpdated;
-
-    public void setTask_id(Integer task_id) {
-        this.task_id = task_id;
-    }
 
     public Integer getSrtd() {
         return srtd;
@@ -138,10 +144,6 @@ public class LEDOfficeMongoEntity {
 
     public void setBlkChuts(Integer blkChuts) {
         this.blkChuts = blkChuts;
-    }
-
-    public Integer getTask_id() {
-        return task_id;
     }
 
     public Integer getCartonsToOCSorter1() {
@@ -243,7 +245,6 @@ public class LEDOfficeMongoEntity {
     @Override
     public String toString() {
         return "LEDOfficeMongoEntity{" +
-                "task_id=" + task_id +
                 ", srtd=" + srtd +
                 ", occrtns=" + occrtns +
                 ", avBufln=" + avBufln +

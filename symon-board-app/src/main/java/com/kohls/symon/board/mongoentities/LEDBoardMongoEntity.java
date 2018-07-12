@@ -10,9 +10,9 @@ import java.util.Date;
 @Document
 public class LEDBoardMongoEntity {
 
-    @Id
+  /*  @Id
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    public Integer task_id; ;
+    public Integer task_id; ;*/
     public Float  pkd ;
     public Float  srt;
     private String packWave;
@@ -35,9 +35,6 @@ public class LEDBoardMongoEntity {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String ledLocation;
 
-    public void setTask_id(Integer task_id) {
-        this.task_id = task_id;
-    }
 
     public Float getPkd() {
         return pkd;
@@ -55,9 +52,6 @@ public class LEDBoardMongoEntity {
         this.srt = srt;
     }
 
-    public Integer getTask_id() {
-        return task_id;
-    }
 
     public String getPackWave() {
         return packWave;
