@@ -10,8 +10,6 @@ public class LEDBoardEntity {
     @Id
     @GeneratedValue
     private Integer task_id; ;
-    @Column(name = "Sorter",nullable = false)
-    private Integer  sorter;
     @Column(name = "Picked",nullable = false)
     private Float  pkd ;
     @Column(name = "Sorted",nullable = false)
@@ -41,14 +39,6 @@ public class LEDBoardEntity {
 
     public void setTask_id(Integer task_id) {
         this.task_id = task_id;
-    }
-
-    public Integer getSorter() {
-        return sorter;
-    }
-
-    public void setSorter(Integer sorter) {
-        this.sorter = sorter;
     }
 
     public Float getPkd() {
@@ -143,7 +133,6 @@ public class LEDBoardEntity {
     public String toString() {
         return "LEDBoardEntity{" +
                 "task_id=" + task_id +
-                ", sorter=" + sorter +
                 ", pkd=" + pkd +
                 ", srt=" + srt +
                 ", packWave='" + packWave + '\'' +

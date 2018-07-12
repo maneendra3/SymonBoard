@@ -1,5 +1,6 @@
 package com.kohls.symon.board.utils;
 
+import com.kohls.symon.board.constants.Constants;
 import com.kohls.symon.board.mongoentities.LEDBoardMongoEntity;
 import com.kohls.symon.board.mongoentities.LEDOfficeMongoEntity;
 import com.kohls.symon.board.model.LEDOffice;
@@ -36,10 +37,10 @@ public class LEDUtils {
     }
     private static void setLEDBoardData(List<LEDBoardMongoEntity> ledBoardWestData,List<LEDBoardMongoEntity> ledBoardEASTData,List<LEDBoardMongoEntity> ledBoard){
         ledBoard.forEach(ledBoardMongoEntity -> {
-            if("west".equalsIgnoreCase(ledBoardMongoEntity.getLedLocation())){
+            if(Constants.REGION_WEST.equalsIgnoreCase(ledBoardMongoEntity.getLedLocation())){
                 ledBoardWestData.add(ledBoardMongoEntity);
             }
-            if ("east".equalsIgnoreCase(ledBoardMongoEntity.getLedLocation())){
+            if (Constants.REGION_EAST.equalsIgnoreCase(ledBoardMongoEntity.getLedLocation())){
                 ledBoardEASTData.add(ledBoardMongoEntity);
             }
         });

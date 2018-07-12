@@ -7,7 +7,7 @@ export default class FourExTable extends React.Component{
     var listItems = this.props.data.map(function(item) {
       return ( 
         <tr>
-            <td>{item["sorter"]}</td>
+            <td>{item["packWave"]}</td>
             <td>{item["pkd"]}</td>
             <td>{item["srt"]}</td>
         </tr>

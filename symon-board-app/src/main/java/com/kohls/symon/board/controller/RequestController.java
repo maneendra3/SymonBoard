@@ -9,6 +9,7 @@ import com.kohls.symon.board.utils.LEDUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,12 +37,14 @@ public class RequestController {
         List<LEDBoardMongoEntity> ledBoard=new ArrayList<>();
 		try {
             ledOfficeData = mongoLEDOfficeRepository.getAll();
-            ledBoard= ledBoardRepository.findAll();
+           // ledBoard= ledBoardRepository.findAll();
+            Sort sort = new Sort(Sort.Direction.ASC, "lastUpdated");
+            ledBoard=ledBoardRepository.getByLedLocation(sort);
             ledData= LEDUtils.ledOfficeData(ledOfficeData,ledBoard);
         }catch (Exception ex){
 		    ex.printStackTrace();
         }
-        logger.info("Fetched Data From MongoDB and size="+ledData.size());
+        logger.info("Fetched Data From MongoDB and size="+ledBoard.size());
 		return ledData;
 	}
 

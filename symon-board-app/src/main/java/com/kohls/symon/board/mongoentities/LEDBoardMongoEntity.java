@@ -13,10 +13,8 @@ public class LEDBoardMongoEntity {
     @Id
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public Integer task_id; ;
-    public Integer  sorter;
     public Float  pkd ;
     public Float  srt;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String packWave;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String status;
@@ -39,14 +37,6 @@ public class LEDBoardMongoEntity {
 
     public void setTask_id(Integer task_id) {
         this.task_id = task_id;
-    }
-
-    public Integer getSorter() {
-        return sorter;
-    }
-
-    public void setSorter(Integer sorter) {
-        this.sorter = sorter;
     }
 
     public Float getPkd() {
